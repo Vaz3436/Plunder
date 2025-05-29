@@ -186,7 +186,7 @@ public class Main extends JPanel{
         for (int i = 0; i < canonBalls.size(); i++) {
             if (canonBalls.get(i).dist > 75) {
                 canonBalls.remove(i);
-
+                i--;
             }
 
         }
@@ -278,6 +278,30 @@ public class Main extends JPanel{
 //        g2.setColor(Color.black);
 //        g2.setFont(new Font("TimesRoman", Font.PLAIN, 100));
 //        g2.drawString(""+p1Points, 100, 150);
+
+        //draw player 1 health bar
+
+        int health1 = player.health;
+        int red1 = (int)(255 * (100 - health1) / 100.0); // more red as health drops
+        int green1 = (int)(255 * (health1 / 100.0));     // less green as health drops
+        g2.setColor(new Color(red1, green1, 0));
+
+        g2.fillRect(100,75, player.health * 2,30);
+        g2.setColor(Color.black);
+        g2.setStroke(new BasicStroke(5));
+        g2.drawRect(100,75,200, 30);
+
+        //player 2 health bar
+        int health = player2.health;
+        int red = (int)(255 * (100 - health) / 100.0); // more red as health drops
+        int green = (int)(255 * (health / 100.0));     // less green as health drops
+        g2.setColor(new Color(red, green, 0));
+
+        g2.fillRect(1200,75, player2.health * 2,30);
+        g2.setColor(Color.black);
+        g2.setStroke(new BasicStroke(5));
+        g2.drawRect(1200,75,200, 30);
+
     }
 
 
