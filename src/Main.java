@@ -378,12 +378,7 @@ public class Main extends JPanel{
             g2.fillOval(350, 100, 700, 450);
 
             // Optional: Skull & Crossbones icon (very simple)
-            g2.setColor(Color.BLACK);
-            g2.setStroke(new BasicStroke(5));
-            g2.drawLine(675, 225, 725, 275); // Bone 1
-            g2.drawLine(725, 225, 675, 275); // Bone 2
-            g2.drawOval(690, 190, 50, 50);   // Skull
-            g2.drawLine(705, 220, 705, 230); // Mouth line
+
 
             // Message
             g2.setColor(Color.RED);
