@@ -98,7 +98,7 @@ public class Main extends JPanel{
         player2.move(dx, dy);
 
 
-        if (keys[KeyEvent.VK_Q] || keys[KeyEvent.VK_Z]) {
+        if (keys[KeyEvent.VK_SHIFT]) {
             if (lastCanonBall > 50) {
 
                 double angle = player.getAngle();
@@ -152,7 +152,7 @@ public class Main extends JPanel{
 
         }
 
-        if (keys[KeyEvent.VK_M]) {
+        if (keys[KeyEvent.VK_PERIOD]) {
             if (lastCanonBall2 > 50) {
 
                 double angle = player2.getAngle();
@@ -370,11 +370,30 @@ public class Main extends JPanel{
         g2.drawRect(1147,72, 206, 36);
 
         if (win1){
-            g2.setColor(Color.white);
-            g2.fillOval(400,150,700,400);
-            g2.setColor(Color.red);
-            g2.setFont(new Font("ComicSans", Font.PLAIN, 80));
-            g2.drawString("Red Wins!!", 475, 330);
+            g2.setColor(new Color(10, 10, 30)); // Dark navy
+            g2.fillRect(0, 0, getWidth(), getHeight());
+
+            // Draw a weathered parchment circle
+            g2.setColor(new Color(222, 184, 135)); // Light brown (parchment)
+            g2.fillOval(350, 100, 700, 450);
+
+            // Optional: Skull & Crossbones icon (very simple)
+            g2.setColor(Color.BLACK);
+            g2.setStroke(new BasicStroke(5));
+            g2.drawLine(675, 225, 725, 275); // Bone 1
+            g2.drawLine(725, 225, 675, 275); // Bone 2
+            g2.drawOval(690, 190, 50, 50);   // Skull
+            g2.drawLine(705, 220, 705, 230); // Mouth line
+
+            // Message
+            g2.setColor(Color.RED);
+            g2.setFont(new Font("Old English Text MT", Font.BOLD, 60)); // Pirate-looking font
+            g2.drawString("Red Wins!!", 520, 350);
+
+            // Optional: Add a pirate phrase
+            g2.setColor(Color.BLACK);
+            g2.setFont(new Font("Serif", Font.ITALIC, 28));
+            g2.drawString("Ye've sent 'em to Davy Jones' locker!", 470, 410);
             repaint();
 
         }
