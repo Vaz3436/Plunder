@@ -48,6 +48,23 @@ public class Main extends JPanel{
         setupInput();
     }
 
+    public void restart(){
+        System.out.println("restart");
+        player = null;
+        player2 = null;
+
+        player = new Player(200, 400, sizeW, sizeL, false, this);
+        player2 = new Player(1100, 400, sizeW, sizeL, true,this);
+
+        win1 = false;
+        win2 = false;
+
+        timer.start();
+
+        repaint();
+
+    }
+
     public void update() {
         frames++;
         lastCanonBall += 1;
@@ -190,6 +207,8 @@ public class Main extends JPanel{
         }
 
 
+
+
         for (int i = 0; i < canonBalls.size(); i++) {
             if (canonBalls.get(i).dist > 75) {
                 canonBalls.remove(i);
@@ -258,17 +277,28 @@ public class Main extends JPanel{
 
 
     }
-        public void setupInput(){
-            addKeyListener(new KeyAdapter() {
-                public void keyReleased(KeyEvent e) {
-                    keys[e.getKeyCode()] = false;
+
+    public void setupInput(){
+        addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent e) {
+                keys[e.getKeyCode()] = false;
+            }
+
+            public void keyPressed(KeyEvent e) {
+                keys[e.getKeyCode()] = true;
+
+                if(keys[KeyEvent.VK_R]){
+                    restart();
                 }
 
-                public void keyPressed(KeyEvent e) {
-                    keys[e.getKeyCode()] = true;
-                }
-            });
-        }
+            }
+
+
+
+        });
+    }
+
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -330,6 +360,7 @@ public class Main extends JPanel{
             g2.setColor(Color.red);
             g2.setFont(new Font("ComicSans", Font.PLAIN, 80));
             g2.drawString("Red Wins!!", 475, 330);
+            repaint();
 
         }
         if (win2){
@@ -338,6 +369,7 @@ public class Main extends JPanel{
             g2.setColor(Color.blue);
             g2.setFont(new Font("ComicSans", Font.PLAIN, 80));
             g2.drawString("Blue Wins!!", 475, 330);
+            repaint();
 
         }
 
