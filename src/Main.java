@@ -18,6 +18,8 @@ public class Main extends JPanel{
     private Capture capture;
     private int p1Points;
     private int frames;
+    private boolean win1;
+    private boolean win2;
 
 
     public Main(int w, int h){
@@ -31,12 +33,15 @@ public class Main extends JPanel{
 
         canonBalls = new ArrayList<>();
 
-        player = new Player(400, 400, sizeW, sizeL, false, this);
-        player2 = new Player(0, 0, sizeW, sizeL, true,this);
+        player = new Player(200, 400, sizeW, sizeL, false, this);
+        player2 = new Player(1100, 400, sizeW, sizeL, true,this);
 
         capture = new Capture(600,400);
 
         keys = new boolean[256];
+
+        win1 = false;
+        win2 = false;
 
         timer = new Timer(1000/60, e->update());
         timer.start();
@@ -50,6 +55,8 @@ public class Main extends JPanel{
 
         int dx = 0;
         int dy = 0;
+
+
 
         if (keys[KeyEvent.VK_A])
             player.rotate(-0.04);
@@ -74,7 +81,7 @@ public class Main extends JPanel{
         player2.move(dx, dy);
 
 
-        if (keys[KeyEvent.VK_Q]) {
+        if (keys[KeyEvent.VK_Q] || keys[KeyEvent.VK_Z]) {
             if (lastCanonBall > 50) {
 
                 double angle = player.getAngle();
@@ -200,10 +207,10 @@ public class Main extends JPanel{
                 canonBalls.remove(i);
                 i--;
 
-                if (player.health - 10 < 0)
+                if (player.health - 5 < 0)
                     player.health = 0;
                 else
-                    player.health -= 10;
+                    player.health -= 5;
                 System.out.println(player.health);
             }
 
@@ -214,14 +221,23 @@ public class Main extends JPanel{
                 canonBalls.remove(i);
                 i--;
 
-                if (player2.health - 10 < 0)
+                if (player2.health - 5 < 0)
                     player2.health = 0;
                 else
-                    player2.health -= 10;
+                    player2.health -= 5;
                 System.out.println(player2.health);
             }
 
         }
+        if (player.health == 0){
+            win2 = true;
+            timer.stop();
+        }
+        if (player2.health == 0){
+            win1 = true;
+            timer.stop();
+        }
+
 
 
         repaint();
@@ -290,6 +306,9 @@ public class Main extends JPanel{
         g2.setColor(Color.black);
         g2.setStroke(new BasicStroke(5));
         g2.drawRect(100,75,200, 30);
+        g2.setStroke(new BasicStroke(3));
+        g2.setColor(Color.red);
+        g2.drawRect(97,72, 206, 36);
 
         //player 2 health bar
         int health = player2.health;
@@ -297,10 +316,30 @@ public class Main extends JPanel{
         int green = (int)(255 * (health / 100.0));     // less green as health drops
         g2.setColor(new Color(red, green, 0));
 
-        g2.fillRect(1200,75, player2.health * 2,30);
+        g2.fillRect(1150,75, player2.health * 2,30);
         g2.setColor(Color.black);
         g2.setStroke(new BasicStroke(5));
-        g2.drawRect(1200,75,200, 30);
+        g2.drawRect(1150,75,200, 30);
+        g2.setStroke(new BasicStroke(3));
+        g2.setColor(Color.blue);
+        g2.drawRect(1147,72, 206, 36);
+
+        if (win1){
+            g2.setColor(Color.white);
+            g2.fillOval(400,150,700,400);
+            g2.setColor(Color.red);
+            g2.setFont(new Font("ComicSans", Font.PLAIN, 80));
+            g2.drawString("Red Wins!!", 475, 330);
+
+        }
+        if (win2){
+            g2.setColor(Color.white);
+            g2.fillOval(400,150,700,400);
+            g2.setColor(Color.blue);
+            g2.setFont(new Font("ComicSans", Font.PLAIN, 80));
+            g2.drawString("Blue Wins!!", 475, 330);
+
+        }
 
     }
 
@@ -339,5 +378,5 @@ public class Main extends JPanel{
         frame.setVisible(true);
     }
 
-
 }
+
