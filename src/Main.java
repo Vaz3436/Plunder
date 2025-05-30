@@ -370,15 +370,13 @@ public class Main extends JPanel{
         g2.drawRect(1147,72, 206, 36);
 
         if (win1){
-            g2.setColor(new Color(10, 10, 30)); // Dark navy
-            g2.fillRect(0, 0, getWidth(), getHeight());
 
             // Draw a weathered parchment circle
             g2.setColor(new Color(222, 184, 135)); // Light brown (parchment)
             g2.fillOval(350, 100, 700, 450);
 
             // Optional: Skull & Crossbones icon (very simple)
-
+            g2.drawImage(Resources.skull, 630, 150, null);
 
             // Message
             g2.setColor(Color.RED);
@@ -389,15 +387,32 @@ public class Main extends JPanel{
             g2.setColor(Color.BLACK);
             g2.setFont(new Font("Serif", Font.ITALIC, 28));
             g2.drawString("Ye've sent 'em to Davy Jones' locker!", 470, 410);
+
+            g2.setFont(new Font("", Font.BOLD, 28));
+            g2.drawString("Press R to restart.", 530, 460);
             repaint();
 
         }
         if (win2){
-            g2.setColor(Color.white);
-            g2.fillOval(400,150,700,400);
-            g2.setColor(Color.blue);
-            g2.setFont(new Font("ComicSans", Font.PLAIN, 80));
-            g2.drawString("Blue Wins!!", 475, 330);
+// Draw a weathered parchment circle
+            g2.setColor(new Color(222, 184, 135)); // Light brown (parchment)
+            g2.fillOval(350, 100, 700, 450);
+
+            // Optional: Skull & Crossbones icon (very simple)
+            g2.drawImage(Resources.skull, 630, 150, null);
+
+            // Message
+            g2.setColor(Color.BLUE);
+            g2.setFont(new Font("Old English Text MT", Font.BOLD, 60)); // Pirate-looking font
+            g2.drawString("Blue Wins!!", 520, 350);
+
+            // Optional: Add a pirate phrase
+            g2.setColor(Color.BLACK);
+            g2.setFont(new Font("Serif", Font.ITALIC, 28));
+            g2.drawString("Ye've sent 'em to Davy Jones' locker!", 470, 410);
+
+            g2.setFont(new Font("", Font.BOLD, 28));
+            g2.drawString("Press R to restart.", 530, 460);
             repaint();
 
         }
