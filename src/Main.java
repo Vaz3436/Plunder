@@ -49,7 +49,6 @@ public class Main extends JPanel{
     }
 
     public void restart(){
-        System.out.println("restart");
         player = null;
         player2 = null;
 
@@ -58,8 +57,10 @@ public class Main extends JPanel{
 
         win1 = false;
         win2 = false;
+        canonBalls.clear();
 
         timer.start();
+
 
         repaint();
 
@@ -424,7 +425,7 @@ public class Main extends JPanel{
 
     public static void main(String[] args) {
         // Create the window
-        JFrame frame = new JFrame("Water Animation");
+        JFrame frame = new JFrame("Plunder");
         frame.setSize(1440, 900);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
