@@ -294,6 +294,13 @@ public class Main extends JPanel{
 
     }
 
+    public void generateMedKit(){
+        int randX = (int)(getWidth()*Math.random());
+        int randY = (int)(getHeight()*Math.random());
+
+
+    }
+
     public void setupInput(){
         addKeyListener(new KeyAdapter() {
             public void keyReleased(KeyEvent e) {
@@ -387,7 +394,7 @@ public class Main extends JPanel{
             // Optional: Add a pirate phrase
             g2.setColor(Color.BLACK);
             g2.setFont(new Font("Serif", Font.ITALIC, 28));
-            g2.drawString("Ye've sent 'em to Davy Jones' locker!", 470, 410);
+            g2.drawString("insanely tough", 470, 410);
 
             g2.setFont(new Font("", Font.BOLD, 28));
             g2.drawString("Press R to restart.", 530, 460);
@@ -410,7 +417,7 @@ public class Main extends JPanel{
             // Optional: Add a pirate phrase
             g2.setColor(Color.BLACK);
             g2.setFont(new Font("Serif", Font.ITALIC, 28));
-            g2.drawString("Ye've sent 'em to Davy Jones' locker!", 470, 410);
+            g2.drawString("DO NOT REDEEM THE CARD", 470, 410);
 
             g2.setFont(new Font("", Font.BOLD, 28));
             g2.drawString("Press R to restart.", 530, 460);
