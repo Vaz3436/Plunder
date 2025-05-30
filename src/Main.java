@@ -248,6 +248,21 @@ public class Main extends JPanel{
             }
 
         }
+
+        for (int i = 0; i < canonBalls.size(); i++) {
+            for (int j = i + 1; j < canonBalls.size(); j++) {
+                if (canonBalls.get(i).intersects(canonBalls.get(j))) {
+                    // Remove the higher index first to avoid shifting issues
+                    canonBalls.remove(j);
+                    canonBalls.remove(i);
+                    i = -1; // restart the loop after modifying the list
+                    break;
+                }
+            }
+        }
+
+
+
         if (player.health == 0){
             win2 = true;
             timer.stop();
