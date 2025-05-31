@@ -15,6 +15,7 @@ public class Main extends JPanel{
     private int lastCanonBall;
     private int lastCanonBall2;
     private ArrayList<CanonBall> canonBalls;
+    private ArrayList<Medkit> medKits;
     private Capture capture;
     private int p1Points;
     private int frames;
@@ -31,7 +32,9 @@ public class Main extends JPanel{
 
         OceanBackground waterPanel = new OceanBackground();
 
+
         canonBalls = new ArrayList<>();
+        medKits = new ArrayList<>();
 
         player = new Player(200, 400, sizeW, sizeL, false, this);
         player2 = new Player(1100, 400, sizeW, sizeL, true,this);
@@ -45,6 +48,8 @@ public class Main extends JPanel{
 
         timer = new Timer(1000/60, e->update());
         timer.start();
+
+        generateMedKit();
         setupInput();
     }
 
@@ -58,6 +63,7 @@ public class Main extends JPanel{
         win1 = false;
         win2 = false;
         canonBalls.clear();
+        medKits.clear();
 
         timer.start();
 
@@ -298,7 +304,7 @@ public class Main extends JPanel{
         int randX = (int)(getWidth()*Math.random());
         int randY = (int)(getHeight()*Math.random());
 
-
+        medKits.add(new Medkit(randX, randY));
     }
 
     public void setupInput(){
@@ -376,6 +382,11 @@ public class Main extends JPanel{
         g2.setStroke(new BasicStroke(3));
         g2.setColor(Color.blue);
         g2.drawRect(1147,72, 206, 36);
+
+        for (int i = 0; i < medKits.size(); i++) {
+            medKits.get(i).draw(g2);
+
+        }
 
         if (win1){
 
