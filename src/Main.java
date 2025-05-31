@@ -49,7 +49,10 @@ public class Main extends JPanel{
         timer = new Timer(1000/60, e->update());
         timer.start();
 
-        generateMedKit();
+        for (int i = 0; i < 20; i++) {
+            generateMedKit();
+        }
+
         setupInput();
     }
 
@@ -227,6 +230,20 @@ public class Main extends JPanel{
 
         for (CanonBall canonBall : canonBalls)
             canonBall.move();
+
+        for (int i = 0; i < medKits.size(); i++) {
+            if(medKits.get(i).intersects(player)){
+                medKits.get(i).addHealth(player);
+                medKits.remove(i);
+                i--;
+            }
+
+            if(medKits.get(i).intersects(player2)){
+                medKits.get(i).addHealth(player2);
+                medKits.remove(i);
+                i--;
+            }
+        }
 
         for (int i = 0; i < canonBalls.size(); i++) {
             if (canonBalls.get(i).intersects(player)) {

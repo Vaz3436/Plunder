@@ -24,9 +24,9 @@ public class Sprite {
         g2.drawImage(image, location.x, location.y, null);
     }
 
-    public boolean intersects(Sprite other){
+    public boolean intersects(Player other){
         Rectangle hitBox = new Rectangle(location.x, location.y, image.getWidth(), image.getHeight());
-        Rectangle otherHitBox = new Rectangle(other.location.x, other.location.y, other.image.getWidth(), other.image.getHeight());
+        Rectangle otherHitBox = new Rectangle(other.getX(), other.getY(), other.getWidth(), other.getHeight());
         return hitBox.intersects(otherHitBox);
     }
 
