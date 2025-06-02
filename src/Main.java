@@ -16,6 +16,7 @@ public class Main extends JPanel{
     private int lastCanonBall2;
     private ArrayList<CanonBall> canonBalls;
     private ArrayList<Medkit> medKits;
+    private ArrayList<Bomb> bombs;
     private Capture capture;
     private int p1Points;
     private int frames;
@@ -35,6 +36,7 @@ public class Main extends JPanel{
 
         canonBalls = new ArrayList<>();
         medKits = new ArrayList<>();
+        bombs = new ArrayList<>();
 
         player = new Player(200, 400, sizeW, sizeL, false, this);
         player2 = new Player(1100, 400, sizeW, sizeL, true,this);
@@ -46,12 +48,13 @@ public class Main extends JPanel{
         win1 = false;
         win2 = false;
 
+        for (int i = 0; i < 20; i++) {
+            generateBomb();
+        }
+
         timer = new Timer(1000/60, e->update());
         timer.start();
 
-        for (int i = 0; i < 20; i++) {
-            generateMedKit();
-        }
 
         setupInput();
     }
@@ -67,6 +70,7 @@ public class Main extends JPanel{
         win2 = false;
         canonBalls.clear();
         medKits.clear();
+        bombs.clear();
 
         timer.start();
 
@@ -245,6 +249,7 @@ public class Main extends JPanel{
             }
         }
 
+
         for (int i = 0; i < canonBalls.size(); i++) {
             if (canonBalls.get(i).intersects(player)) {
                 canonBalls.remove(i);
@@ -323,6 +328,15 @@ public class Main extends JPanel{
 
         medKits.add(new Medkit(randX, randY));
     }
+
+    public void generateBomb(){
+        int randX = (int)(getWidth()*Math.random());
+        int randY = (int)(getHeight()*Math.random());
+
+        bombs.add(new Bomb(randX, randY));
+    }
+
+
 
     public void setupInput(){
         addKeyListener(new KeyAdapter() {
@@ -403,6 +417,17 @@ public class Main extends JPanel{
         for (int i = 0; i < medKits.size(); i++) {
             medKits.get(i).draw(g2);
 
+        }
+
+        for (int i = 0; i < bombs.size(); i++) {
+            bombs.get(i).draw(g2);
+        }
+
+        for (int i = 0; i < bombs.size(); i++) {
+            if(bombs.get(i).intersects(player)) {
+                bombs.get(i).explode(g2);
+                System.out.println("asdf");
+            }
         }
 
         if (win1){
