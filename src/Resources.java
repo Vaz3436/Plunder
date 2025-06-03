@@ -10,12 +10,13 @@ public class Resources {
     //    ImageIO line.
 
 
-    public static BufferedImage skull, medkit;
+    public static BufferedImage skull, medkit, pellets;
 
     static{
         try{
             skull = ImageIO.read(new File("./res/skull.png"));
             medkit = ImageIO.read(new File("./res/medkit.png"));
+            pellets = ImageIO.read(new File("./res/pellets.png"));
 
 
         }catch(Exception e){e.printStackTrace();}
