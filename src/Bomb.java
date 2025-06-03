@@ -13,6 +13,8 @@ public class Bomb extends Sprite {
     private Graphics2D g2;
     boolean isExploded = false;
     boolean blink = false;
+    int frames = 0;
+    int bombTimer = 0;
 
 
     public Bomb(int x, int y) {
@@ -58,6 +60,8 @@ public class Bomb extends Sprite {
 
     @Override
     public void draw(Graphics2D g2) {
+        frames++;
+        g2.setColor(Color.RED);
         if(isExploded && size<300){
 //            g2.drawOval(x+size/2+20, y+size/2+20, size, size);
             if(size<300 ) {
@@ -70,10 +74,12 @@ public class Bomb extends Sprite {
         }
 
         else if(blink && size>=300){
-            size ++;
-            if(size % 2 == 0)
+
+            if ((frames % 60) < 30) {
                 g2.setColor(Color.RED);
-            else g2.setColor(Color.blue);
+            } else {
+                g2.setColor(new Color(0, 0, 0, 0));
+            }
             g2.drawOval(x, y, 300, 300);
 
             System.out.println("work");
