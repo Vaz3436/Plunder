@@ -10,8 +10,7 @@ public class Resources {
     //    ImageIO line.
 
 
-    public static BufferedImage skull, medkit, bomb;
-    public static BufferedImage skull, medkit, pellets;
+    public static BufferedImage skull, medkit, bomb, pellets;
 
     static{
         try{
