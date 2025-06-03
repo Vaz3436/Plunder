@@ -14,6 +14,7 @@ public class Player {
     private int y;
     private boolean player2;
     public int health;
+    private boolean shotgun;
 
     // Base hitbox points relative to the center (before rotation)
     private int[] baseXPoints;
@@ -178,4 +179,12 @@ public class Player {
     public int getCenterY() {
         return y + height / 2;
 }
+
+    public boolean isShotgun() {
+        return shotgun;
+    }
+
+    public void setShotgun(boolean shotgun) {
+        this.shotgun = shotgun;
+    }
 }

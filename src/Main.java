@@ -25,6 +25,8 @@ public class Main extends JPanel{
     private boolean win2;
     private boolean p1Shotgun;
     private boolean p2Shotgun;
+    int numPow1;
+    int numPow2;
 
 
     public Main(int w, int h){
@@ -33,6 +35,9 @@ public class Main extends JPanel{
         sizeW = 50;
         sizeL = 100;
         p1Points = 0;
+
+        numPow1 = 0;
+        numPow2 = 0;
 
         OceanBackground waterPanel = new OceanBackground();
         multiShot = new ArrayList<>();
@@ -140,10 +145,6 @@ public class Main extends JPanel{
 
                 // Cannon spacing along the length of the ship (local Y offset)
                 int[] cannonOffsets = {-30, 0, 30};
-                if (p1Shotgun) {
-
-
-                }
 
                 for (int offsetY : cannonOffsets) {
 
@@ -333,6 +334,7 @@ public class Main extends JPanel{
 
 
 
+
         repaint();
 
 
@@ -435,6 +437,10 @@ public class Main extends JPanel{
         g2.setStroke(new BasicStroke(3));
         g2.setColor(Color.red);
         g2.drawRect(97,72, 206, 36);
+
+        if(player.isShotgun()){
+
+        }
 
         //player 2 health bar
         int health = player2.health;
