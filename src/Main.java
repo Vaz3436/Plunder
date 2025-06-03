@@ -23,8 +23,7 @@ public class Main extends JPanel{
     private int frames;
     private boolean win1;
     private boolean win2;
-    private boolean p1Shotgun;
-    private boolean p2Shotgun;
+
     int numPow1;
     int numPow2;
 
@@ -47,8 +46,6 @@ public class Main extends JPanel{
         medKits = new ArrayList<>();
         bombs = new ArrayList<>();
 
-        p1Shotgun = false;
-        p2Shotgun = false;
 
         player = new Player(200, 400, sizeW, sizeL, false, this);
         player2 = new Player(1100, 400, sizeW, sizeL, true,this);
@@ -270,13 +267,13 @@ public class Main extends JPanel{
 
         for (int i = 0; i < multiShot.size(); i++) {
             if(multiShot.get(i).intersects(player)){
-                p1Shotgun = true;
+                player.setShotgun(true);
                 multiShot.remove(i);
                 i--;
             }
 
             if(multiShot.get(i).intersects(player2)){
-                p2Shotgun = true;
+                player2.setShotgun(true);
                 multiShot.remove(i);
                 i--;
             }
