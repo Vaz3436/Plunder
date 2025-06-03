@@ -257,11 +257,13 @@ public class Main extends JPanel{
             if(medKits.get(i).intersects(player)){
                 medKits.get(i).addHealth(player);
                 medKits.remove(i);
+                continue;
             }
 
             if(medKits.get(i).intersects(player2)){
                 medKits.get(i).addHealth(player2);
                 medKits.remove(i);
+
             }
         }
 
@@ -270,6 +272,7 @@ public class Main extends JPanel{
                 player.setShotgun(true);
                 multiShot.remove(i);
                 i--;
+                continue;
             }
 
             if(multiShot.get(i).intersects(player2)){
@@ -438,6 +441,13 @@ public class Main extends JPanel{
         g2.drawRect(97,72, 206, 36);
 
         if(player.isShotgun()){
+            g2.setStroke(new BasicStroke(3));
+            g2.setColor(brown);
+            g2.fillRect(104,115, 55,40);
+            g2.setColor(Color.black);
+            g2.drawRect(104, 115, 55, 40);
+            g2.drawImage(Resources.pellets, 105, 110, null);
+
 
         }
 
