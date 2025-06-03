@@ -426,7 +426,6 @@ public class Main extends JPanel{
         for (int i = 0; i < bombs.size(); i++) {
             if(bombs.get(i).intersects(player)) {
                 bombs.get(i).explode(g2);
-                System.out.println("asdf");
             }
         }
 
