@@ -17,11 +17,14 @@ public class Main extends JPanel{
     private ArrayList<CanonBall> canonBalls;
     private ArrayList<Medkit> medKits;
     private ArrayList<Bomb> bombs;
+    private ArrayList<Shotgun> multiShot;
     private Capture capture;
     private int p1Points;
     private int frames;
     private boolean win1;
     private boolean win2;
+    private boolean p1Shotgun;
+    private boolean p2Shotgun;
 
 
     public Main(int w, int h){
@@ -32,11 +35,15 @@ public class Main extends JPanel{
         p1Points = 0;
 
         OceanBackground waterPanel = new OceanBackground();
+        multiShot = new ArrayList<>();
 
 
         canonBalls = new ArrayList<>();
         medKits = new ArrayList<>();
         bombs = new ArrayList<>();
+
+        p1Shotgun = false;
+        p2Shotgun = false;
 
         player = new Player(200, 400, sizeW, sizeL, false, this);
         player2 = new Player(1100, 400, sizeW, sizeL, true,this);
@@ -55,6 +62,12 @@ public class Main extends JPanel{
         timer = new Timer(1000/60, e->update());
         timer.start();
 
+        for (int i = 0; i < 10; i++) {
+            generateMedKit();
+        }
+        for (int i = 0; i < 3; i++) {
+            generateMultiShot();
+        }
 
         setupInput();
     }
@@ -68,8 +81,11 @@ public class Main extends JPanel{
 
         win1 = false;
         win2 = false;
+
+        //arraylist clearings
         canonBalls.clear();
         medKits.clear();
+        multiShot.clear();
         bombs.clear();
 
         timer.start();
@@ -124,6 +140,10 @@ public class Main extends JPanel{
 
                 // Cannon spacing along the length of the ship (local Y offset)
                 int[] cannonOffsets = {-30, 0, 30};
+                if (p1Shotgun) {
+
+
+                }
 
                 for (int offsetY : cannonOffsets) {
 
@@ -239,13 +259,23 @@ public class Main extends JPanel{
             if(medKits.get(i).intersects(player)){
                 medKits.get(i).addHealth(player);
                 medKits.remove(i);
-                i--;
             }
 
             if(medKits.get(i).intersects(player2)){
                 medKits.get(i).addHealth(player2);
                 medKits.remove(i);
-                i--;
+            }
+        }
+
+        for (int i = 0; i < multiShot.size(); i++) {
+            if(multiShot.get(i).intersects(player)){
+                p1Shotgun = true;
+                multiShot.remove(i);
+            }
+
+            if(multiShot.get(i).intersects(player2)){
+                p2Shotgun = true;
+                multiShot.remove(i);
             }
         }
 
@@ -327,6 +357,12 @@ public class Main extends JPanel{
         int randY = (int)(getHeight()*Math.random());
 
         medKits.add(new Medkit(randX, randY));
+    }
+    public void generateMultiShot(){
+        int randX = (int)(getWidth()*Math.random());
+        int randY = (int)(getHeight()*Math.random());
+
+        multiShot.add(new Shotgun(randX, randY));
     }
 
     public void generateBomb(){
@@ -416,6 +452,10 @@ public class Main extends JPanel{
 
         for (int i = 0; i < medKits.size(); i++) {
             medKits.get(i).draw(g2);
+
+        }
+        for (int i = 0; i < multiShot.size(); i++) {
+            multiShot.get(i).draw(g2);
 
         }
 
