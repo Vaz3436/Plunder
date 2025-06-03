@@ -272,11 +272,13 @@ public class Main extends JPanel{
             if(multiShot.get(i).intersects(player)){
                 p1Shotgun = true;
                 multiShot.remove(i);
+                i--;
             }
 
             if(multiShot.get(i).intersects(player2)){
                 p2Shotgun = true;
                 multiShot.remove(i);
+                i--;
             }
         }
 
