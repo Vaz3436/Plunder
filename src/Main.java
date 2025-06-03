@@ -131,8 +131,7 @@ public class Main extends JPanel{
 
 
         if (keys[KeyEvent.VK_SHIFT]) {
-            if (lastCanonBall > 50) {
-
+            if (lastCanonBall > 50 && !player.isShotgun()) {
                 double angle = player.getAngle();
                 double centerX = player.getCenterX();
                 double centerY = player.getCenterY();
@@ -180,6 +179,8 @@ public class Main extends JPanel{
                 }
 
                 lastCanonBall = 0;
+            } else if (player.isShotgun()) {
+                
             }
 
         }
