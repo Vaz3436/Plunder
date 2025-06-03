@@ -12,6 +12,7 @@ public class Bomb extends Sprite {
     private Timer timer;
     private Graphics2D g2;
     boolean isExploded = false;
+    boolean blink = false;
 
 
     public Bomb(int x, int y) {
@@ -57,16 +58,27 @@ public class Bomb extends Sprite {
 
     @Override
     public void draw(Graphics2D g2) {
-        if(isExploded){
+        if(isExploded && size<300){
 //            g2.drawOval(x+size/2+20, y+size/2+20, size, size);
             if(size<300 ) {
                 size += 4;
                 x-=2;
                 y-=2;
             }
-            g2.setColor(Color.RED);
             g2.drawOval(x, y, size, size);
+            blink = true;
         }
+
+        else if(blink && size>=300){
+            size ++;
+            if(size % 2 == 0)
+                g2.setColor(Color.RED);
+            else g2.setColor(Color.blue);
+            g2.drawOval(x, y, 300, 300);
+
+            System.out.println("work");
+        }
+
         //else if(onFire){
 
         //}
