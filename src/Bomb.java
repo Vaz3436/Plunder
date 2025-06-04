@@ -13,6 +13,7 @@ public class Bomb extends Sprite {
     private Graphics2D g2;
     boolean isExploded = false;
     boolean blink = false;
+    boolean deleteMe = false;
     int frames = 0;
     int bombTimer = 0;
 
@@ -23,7 +24,7 @@ public class Bomb extends Sprite {
         this.x = x;
         this.y = y;
         Point loc = new Point(x, y);
-        //sp.addSound("explosion", "./sound/explosion.wav");
+        sp.addSound("explosion", "./sound/explosion.wav");
 
     }
 
@@ -58,8 +59,14 @@ public class Bomb extends Sprite {
 //        }
 //    }
 
+    public boolean isDeleteMe() {
+        return deleteMe;
+    }
+
     @Override
     public void draw(Graphics2D g2) {
+        if(isExploded) bombTimer++;
+        
         frames++;
         g2.setColor(Color.RED);
         if(isExploded && size<300){
@@ -73,6 +80,8 @@ public class Bomb extends Sprite {
             blink = true;
         }
 
+
+
         else if(blink && size>=300){
 
             if ((frames % 60) < 30) {
@@ -83,6 +92,15 @@ public class Bomb extends Sprite {
             g2.drawOval(x, y, 300, 300);
 
             System.out.println("work");
+
+        if(bombTimer == 499)
+            blink = false;
+        } else if (!blink && bombTimer==500) {
+            System.out.println("BOOM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            sp.playSound("explosion");
+            deleteMe = true;
+            return;
+            
         }
 
         //else if(onFire){

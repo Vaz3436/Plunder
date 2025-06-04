@@ -485,6 +485,14 @@ public class Main extends JPanel{
             }
         }
 
+        for (int i = 0; i < bombs.size(); i++) {
+            if(bombs.get(i).deleteMe) {
+                bombs.remove(i);
+                i--;
+            }
+
+        }
+
         if (win1){
 
             // Draw a weathered parchment circle
