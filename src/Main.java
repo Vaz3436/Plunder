@@ -180,7 +180,30 @@ public class Main extends JPanel{
 
                 lastCanonBall = 0;
             } else if (player.isShotgun()) {
-                
+                int numberOfProjectiles = 10; // Number of cannonballs to shoot
+                double spreadAngle = Math.toRadians(45); // Total spread angle in radians (e.g., 45 degrees)
+                double angleStep = spreadAngle / (numberOfProjectiles - 1);
+
+                double startAngle = player.getAngle() - spreadAngle / 2;
+
+                for (int i = 0; i < numberOfProjectiles; i++) {
+                    double shotAngle = startAngle + i * angleStep;
+
+                    // Local position (same as your existing logic)
+                    double localX = player.getCenterY();
+                    double localY = player.getWidth() / 2.0 + 5;
+
+                    // Rotate local position to world coordinates
+                    double worldX = player.getCenterX() + (localX * Math.cos(player.getAngle()) - localY * Math.sin(player.getAngle()));
+                    double worldY = player.getCenterY() + (localX * Math.sin(player.getAngle()) + localY * Math.cos(player.getAngle()));
+
+                    // Velocity based on shot angle
+                    double vx = Math.cos(shotAngle) * 8;
+                    double vy = Math.sin(shotAngle) * 8;
+
+                    canonBalls.add(new CanonBall(worldX, worldY, vx, vy));
+                }
+
             }
 
         }
