@@ -530,7 +530,6 @@ public class Main extends JPanel{
             }
         }
 
-        }
 
 
 
