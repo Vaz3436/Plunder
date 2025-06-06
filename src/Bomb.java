@@ -4,28 +4,27 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Bomb extends Sprite {
-    int x;
-    int y;
-    Point loc;
+
     SoundPlayer sp = new SoundPlayer();
     int size = 1;
     private Timer timer;
     private Graphics2D g2;
-    boolean isExploded = false;
+    public boolean isExploded = false;
     boolean blink = false;
     boolean deleteMe = false;
     int frames = 0;
     int bombTimer = 0;
-
+    private Rectangle hitBox;
+    private Point originalLoc;
+    public boolean boom;
 
     public Bomb(int x, int y) {
 
         super(Resources.bomb, new Point(x, y), true);
-        this.x = x;
-        this.y = y;
-        Point loc = new Point(x, y);
-        sp.addSound("explosion", "./sound/explosion.wav");
 
+        sp.addSound("explosion", "./sound/explosion.wav");
+        hitBox = new Rectangle(x, y, Resources.bomb.getWidth(), Resources.bomb.getHeight());
+        originalLoc  = new Point(x, y);
     }
 
     public void explode(Graphics2D g2) {
@@ -49,19 +48,20 @@ public class Bomb extends Sprite {
         isExploded = exploded;
     }
 
-//    private void startExplode(){
-//        if(size<300 && isExploded){
-//            size+=2;
-//            x--;
-//            y--;
-////            g2.drawOval(x+size/2+20, y+size/2+20, size, size);
-//
-//        }
-//    }
 
     public boolean isDeleteMe() {
         return deleteMe;
     }
+
+    public void damage(Player player){
+        player.health = Math.max(player.health-50, 0);
+    }
+
+    public Rectangle getHitBox(){
+        return hitBox;
+    }
+
+
 
     @Override
     public void draw(Graphics2D g2) {
@@ -70,13 +70,13 @@ public class Bomb extends Sprite {
         frames++;
         g2.setColor(Color.RED);
         if(isExploded && size<300){
-//            g2.drawOval(x+size/2+20, y+size/2+20, size, size);
+//            g2.drawOval(getX()+size/2+getWidth()/2, getY()+size/2+getHeight()/2, size, size);
             if(size<300 ) {
                 size += 4;
-                x-=2;
-                y-=2;
+                move(-2, -2);
+
             }
-            g2.drawOval(x, y, size, size);
+            g2.drawOval(getX()+getWidth()/2, getY()+getHeight()/2, size, size);
             blink = true;
         }
 
@@ -89,13 +89,14 @@ public class Bomb extends Sprite {
             } else {
                 g2.setColor(new Color(0, 0, 0, 0));
             }
-            g2.drawOval(x, y, 300, 300);
+            g2.drawOval(getX()+getWidth()/2, getY()+getHeight()/2, 300, 300);
 
             System.out.println("work");
 
         if(bombTimer == 499)
             blink = false;
         } else if (!blink && bombTimer==500) {
+            boom = true;
             System.out.println("BOOM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             sp.playSound("explosion");
             deleteMe = true;
@@ -106,6 +107,13 @@ public class Bomb extends Sprite {
         //else if(onFire){
 
         //}
+        Point temp = getLocation();
+        setLoc(originalLoc);
         super.draw(g2);
+        setLoc(temp);
+    }
+
+    public int getSize() {
+        return size;
     }
 }

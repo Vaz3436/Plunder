@@ -31,6 +31,14 @@ public class CanonBall {
         return !area1.isEmpty();
     }
 
+    public boolean intersects(Bomb other){
+        Area area1 = new Area(this.hitBox);
+        Area area2 = new Area(other.getHitBox());
+        area1.intersect(area2);
+        return !area1.isEmpty();
+    }
+
+
     public boolean intersects(CanonBall other){
         Area area1 = new Area(this.hitBox);
         Area area2 = new Area(other.getHitBox());

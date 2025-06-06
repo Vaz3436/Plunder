@@ -338,10 +338,9 @@ public class Main extends JPanel{
         for (int i = 0; i < canonBalls.size(); i++) {
             for (int j = i + 1; j < canonBalls.size(); j++) {
                 if (canonBalls.get(i).intersects(canonBalls.get(j))) {
-                    // Remove the higher index first to avoid shifting issues
                     canonBalls.remove(j);
                     canonBalls.remove(i);
-                    i = -1; // restart the loop after modifying the list
+                    i = -1;
                     break;
                 }
             }
@@ -491,7 +490,16 @@ public class Main extends JPanel{
 
         for (int i = 0; i < medKits.size(); i++) {
             medKits.get(i).draw(g2);
+        }
 
+        for (int i = 0; i < bombs.size(); i++) {
+            for (int j = 0; j < canonBalls.size(); j++) {
+                if(canonBalls.get(j).intersects(bombs.get(i))){
+                    bombs.get(i).explode(g2);
+                    canonBalls.remove(j);
+                    j=0;
+                }
+            }
         }
         for (int i = 0; i < multiShot.size(); i++) {
             multiShot.get(i).draw(g2);
@@ -509,12 +517,22 @@ public class Main extends JPanel{
         }
 
         for (int i = 0; i < bombs.size(); i++) {
+            System.out.println("fdsa");
+            if(bombs.get(i).getLocation().distance(player.getX(), player.getY())<bombs.get(i).getSize()&&bombs.get(i).boom){
+                bombs.get(i).damage(player);
+            }
+        }
+
+        for (int i = 0; i < bombs.size(); i++) {
             if(bombs.get(i).deleteMe) {
                 bombs.remove(i);
                 i--;
             }
+        }
 
         }
+
+
 
         if (win1){
 
@@ -600,6 +618,7 @@ public class Main extends JPanel{
         frame.setLocationRelativeTo(null); // Center on screen
         frame.setVisible(true);
     }
+
 
 }
 

@@ -51,11 +51,16 @@ public class Sprite {
         location.y = y;
     }
 
+    public void setLoc(Point location) {
+        this.location = location;
+    }
 
     public boolean isObstacle(){return isObstacle;}
 
     public void setImage(BufferedImage image) { this.image = image; }
 
-
+    public Point getLocation() {
+        return location;
+    }
 }
 
