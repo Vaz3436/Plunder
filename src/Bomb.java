@@ -93,11 +93,11 @@ public class Bomb extends Sprite {
 
             System.out.println("work");
 
-        if(bombTimer == 499)
+        if(bombTimer == 149)
             blink = false;
-        } else if (!blink && bombTimer==500) {
+        } else if (!blink && bombTimer==150) {
             boom = true;
-            System.out.println("BOOM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            //System.out.println("BOOM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             sp.playSound("explosion");
             deleteMe = true;
             return;

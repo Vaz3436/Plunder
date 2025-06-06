@@ -517,9 +517,20 @@ public class Main extends JPanel{
         }
 
         for (int i = 0; i < bombs.size(); i++) {
-            System.out.println("fdsa");
+            if(bombs.get(i).intersects(player2)) {
+                bombs.get(i).explode(g2);
+            }
+        }
+
+        for (int i = 0; i < bombs.size(); i++) {
             if(bombs.get(i).getLocation().distance(player.getX(), player.getY())<bombs.get(i).getSize()&&bombs.get(i).boom){
                 bombs.get(i).damage(player);
+            }
+        }
+
+        for (int i = 0; i < bombs.size(); i++) {
+            if(bombs.get(i).getLocation().distance(player2.getX(), player2.getY())<bombs.get(i).getSize()&&bombs.get(i).boom){
+                bombs.get(i).damage(player2);
             }
         }
 
